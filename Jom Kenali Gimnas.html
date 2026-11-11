@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jom Kenali Gimnas</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--sky:#bfe6f2;--teal:#4db6ac;--peach:#ffb085;--sun:#ffe08a;--lav:#b9a8f0;--rose:#f4a6c0;--ink:#2b4a5e;--bg:#f6fbf8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Fredoka','Comic Sans MS',system-ui,sans-serif;font-size:18px;color:var(--ink);background:var(--bg);padding-bottom:90px}
+h1,h2,h3{margin:0 0 .4em;line-height:1.15}
+h1{font-size:clamp(2.4rem,9vw,4.5rem)}h2{font-size:clamp(1.7rem,6vw,2.4rem)}
+.page{display:none;min-height:100vh}.page.on{display:block}
+.wrap{max-width:960px;margin:0 auto;padding:24px 18px}
+.btn{display:inline-block;border:0;border-radius:999px;padding:13px 26px;font:700 1.05rem 'Fredoka',sans-serif;color:#fff;background:var(--teal);cursor:pointer;box-shadow:0 5px 0 #2f877e;margin:6px 4px}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #2f877e}
+.btn.o{background:#f08a5d;box-shadow:0 5px 0 #b8603a}.btn.p{background:#d4739b;box-shadow:0 5px 0 #a04a70}
+:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.hero{background:linear-gradient(#9fd9ec,#e4f6fb);text-align:center;padding:50px 18px 90px;position:relative;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.sun{position:absolute;top:18px;right:22px;font-size:4.5rem;animation:spin 30s linear infinite}
+.cloud{position:absolute;font-size:3.5rem;opacity:.9;animation:drift 12s ease-in-out infinite alternate}
+.hero .mascot{font-size:8rem;animation:bob 1.8s ease-in-out infinite}
+.hero h1{color:#fff;text-shadow:0 4px 0 var(--ink);-webkit-text-stroke:2px var(--ink)}
+.bubble{background:#fff;border:3px solid var(--ink);border-radius:24px;padding:12px 20px;display:inline-block;font-weight:500}
+.grass{position:absolute;bottom:0;left:0;right:0;height:50px;background:#8fd3a8;border-radius:50% 50% 0 0/100% 100% 0 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.tile{border-radius:26px;padding:20px;text-align:center;color:var(--ink);font-weight:700;cursor:pointer;border:0;font-family:inherit;font-size:1.15rem}
+.tile span{font-size:3rem;display:block;animation:bob 2.2s ease-in-out infinite}
+.friends{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.fr{background:#fff;border:3px solid var(--sky);border-radius:20px;padding:8px 14px;text-align:center;font-weight:500;font-size:.95rem}
+.fr span{display:block;font-size:2.4rem;animation:bob 2s ease-in-out infinite}
+.scene{border-radius:20px;padding:22px;text-align:center;font-size:3rem;background:linear-gradient(#e6f6fb,#d8f0e1);margin-bottom:10px}
+.scene span{display:inline-block;margin:0 6px;animation:bob 1.8s ease-in-out infinite}
+.scene span:nth-child(2){animation-delay:.3s}.scene span:nth-child(3){animation-delay:.6s}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.box{border-radius:26px;padding:20px;background:#fff;border:3px solid var(--sky)}
+.card{perspective:800px;height:380px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f,.b{position:absolute;inset:0;backface-visibility:hidden;border-radius:24px;padding:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:3px solid var(--ink)}
+.f span{font-size:3.6rem;animation:bob 2s ease-in-out infinite}
+.f h3{margin:2px 0}.f small{font-weight:500}
+.b{transform:rotateY(180deg);background:#fff;font-size:.84rem;overflow:hidden;justify-content:flex-start}.bs{flex:1;min-height:0;overflow-y:auto;width:100%}.b .btn{flex-shrink:0;margin:6px 0 0}
+.b .btn{padding:8px 16px;font-size:.9rem}
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;font-weight:700}
+.chain i{background:var(--sun);border-radius:999px;padding:6px 14px;font-style:normal;border:3px solid var(--ink);font-size:.95rem}
+.note{background:#fff6cf;border-left:10px solid var(--sun);border-radius:12px;padding:12px 16px;margin:12px 0;font-size:.98rem}
+.note.safe{background:#ffe9e0;border-color:var(--peach)}.note.in2{background:#e3f6f2;border-color:var(--teal)}
+small.src{color:#5b7a8c;display:block;margin-top:8px;font-size:.8rem}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:.95rem}
+td,th{border:2px solid var(--sky);padding:10px;text-align:left;vertical-align:top}th{background:var(--sun)}
+.tbl{overflow-x:auto}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:14px 18px;border-radius:18px;border:3px solid var(--sky);background:#fff;font:500 1.1rem 'Fredoka',sans-serif;cursor:pointer;color:var(--ink)}
+.opt.ok{background:#c4f0d6}.opt.no{background:#ffd4df}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:var(--ink);padding:8px 4px calc(8px + env(safe-area-inset-bottom,0px));z-index:9}
+nav button{background:none;border:0;color:#fff;font:500 .78rem 'Fredoka',sans-serif;padding:6px 6px;border-radius:14px;cursor:pointer;flex:1}
+nav button span{display:block;font-size:1.45rem}nav button.on{background:#f08a5d}
+.top{position:fixed;right:14px;bottom:86px;z-index:8;border-radius:50%;width:50px;height:50px;border:0;background:#d4739b;color:#fff;font-size:1.4rem;cursor:pointer}
+/* pelajaran animasi */
+.ov{display:none;position:fixed;inset:0;background:rgba(43,74,94,.6);z-index:20;overflow-y:auto;padding:14px}.ov.on{display:block}
+.ovbox{max-width:720px;margin:0 auto;background:var(--bg);border-radius:28px;padding:14px;position:relative}
+.x{position:absolute;right:12px;top:12px;z-index:3;border:0;background:#fff;border-radius:50%;width:42px;height:42px;font-size:1.1rem;cursor:pointer}
+.stage{position:relative;height:420px;perspective:760px;border-radius:22px;overflow:hidden;background:linear-gradient(#bfe6f2,#e8f7f2 80%,#b5e2c4 80%);display:flex;align-items:flex-end;justify-content:center}
+.stage.sw::before{content:'';position:absolute;top:96px;left:20%;right:20%;height:8px;background:#9b7b5c;border-radius:6px}
+.bub{position:absolute;top:12px;left:12px;right:60px;background:#fff;border:3px solid var(--ink);border-radius:20px;padding:10px 14px;font-weight:500;font-size:1rem;z-index:2;min-height:64px}
+.an{font-size:6.5rem;margin-bottom:34px;line-height:1;animation:bob 2s ease-in-out infinite}
+.an.edar{animation:edar 3s ease-in-out infinite alternate}
+.an.kupu{animation:kupu 3.4s ease-in-out infinite}
+.an.layang{animation:layang 2.6s ease-in-out infinite}
+.an.imbang{animation:imbang 2.4s ease-in-out infinite}
+.an.putar{animation:putar 1.6s linear infinite}
+.an.guling{animation:guling 3s ease-in-out infinite alternate}
+.an.ayun{transform-origin:50% -80px;animation:ayun 2.2s ease-in-out infinite;margin-bottom:0;margin-top:80px;align-self:flex-start}
+.an.darat{animation:darat 2.4s ease-in infinite}
+.an.hambur{animation:hambur 1s ease-in-out infinite}
+.an.pulse{animation:pulse 2.4s ease-in-out infinite}
+.notes{opacity:0;transition:opacity 1s;margin-top:10px;padding:0 6px 8px;display:none}.notes.show{opacity:1;display:block}
+.notes ol{padding-left:22px;margin:6px 0}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drift{to{transform:translateX(40px)}}
+@keyframes edar{0%{transform:translate(-110px,0)}25%{transform:translate(-55px,-16px)}50%{transform:translate(0,0)}75%{transform:translate(55px,-16px)}100%{transform:translate(110px,0)}}
+@keyframes kupu{0%,100%{transform:translate(-100px,0)}25%{transform:translate(-30px,-60px) rotate(12deg)}50%{transform:translate(40px,-10px)}75%{transform:translate(100px,-70px) rotate(-12deg)}}
+@keyframes layang{0%,100%{transform:translate(-90px,0) scale(1,1)}15%{transform:translate(-90px,0) scale(1.1,.82)}50%{transform:translate(0,-120px) rotate(-12deg)}85%{transform:translate(90px,0)}}
+@keyframes imbang{0%,100%{transform:rotate(-12deg)}25%,75%{transform:rotate(0)}50%{transform:rotate(12deg)}}
+@keyframes putar{to{transform:rotate(360deg)}}
+@keyframes guling{from{transform:translateX(-120px) rotate(0)}to{transform:translateX(120px) rotate(720deg)}}
+@keyframes ayun{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(30deg)}}
+@keyframes darat{0%{transform:translateY(-150px)}55%{transform:translateY(0) scale(1.15,.82)}70%{transform:scale(.96,1.05)}100%{transform:none}}
+@keyframes hambur{0%,100%{transform:scale(1.1,.85)}45%{transform:translateY(-130px) scale(.92,1.1)}}
+@keyframes pulse{50%{transform:scale(1.25)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.tabs{display:flex;gap:8px;margin:8px 0}.tab{flex:1;border:3px solid var(--sky);background:#fff;border-radius:16px;padding:8px;font:500 .95rem 'Fredoka',sans-serif;cursor:pointer;color:var(--ink)}.tab.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.tl{list-style:none;padding:0;margin:0}.tl li{position:relative;padding:8px 0 8px 22px;border-left:4px solid var(--teal);margin-left:8px}.tl li::before{content:'';position:absolute;left:-10px;top:14px;width:16px;height:16px;border-radius:50%;background:var(--sun);border:3px solid var(--teal)}
+.stops{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.stop{background:#fff;border:3px dashed var(--teal);border-radius:20px;padding:10px 14px;text-align:center;cursor:pointer;font:500 .95rem 'Fredoka',sans-serif;color:var(--ink)}.stop span{font-size:2rem;display:block}.stop.v{border-style:solid;background:#e3f6f2}
+.fact{background:#fff;border:3px solid var(--sun);border-radius:22px;padding:16px;font-size:1.05rem;min-height:80px}
+.lvl{display:block;width:100%;text-align:left;border:0;border-radius:24px;padding:16px 20px;margin:10px 0;font:700 1.1rem 'Fredoka',sans-serif;color:var(--ink);cursor:pointer}.lvl small{display:block;font-weight:400}
+
+/* laman web: hiasan */
+.hero>*:not(.sun):not(.cloud):not(.bal):not(.grass){position:relative;z-index:2}.bal{pointer-events:none;z-index:0;position:absolute;font-size:2.6rem;animation:flt 5s ease-in-out infinite alternate}@keyframes flt{to{transform:translateY(-24px) rotate(8deg)}}@media(max-width:700px){.bal{display:none}}
+.pb{height:16px;background:#fff;border:3px solid var(--sky);border-radius:99px;margin:10px 0 4px;overflow:hidden}.pb i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--sun));transition:width .6s}
+.mini{font-size:.8rem;text-align:left;background:#fff6cf;border-radius:12px;padding:6px 10px;margin:4px 0}
+/* animasi 3D */
+.stage{touch-action:pan-y;cursor:grab}
+.cam{position:absolute;left:50%;top:80%;width:0;height:0;transform-style:preserve-3d;transform:scale(.7) rotateX(-10deg) rotateY(-24deg);animation:cam 10s ease-in-out infinite}
+@keyframes cam{50%{transform:scale(.7) rotateX(-10deg) rotateY(24deg)}}
+.pt,.at,.j,.ob,.pl,.pv,.rt{position:absolute;transform-style:preserve-3d}
+.at,.j,.ob,.pl,.pv,.rt{left:0;top:0;width:0;height:0}
+.pt i{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 28%,color-mix(in srgb,var(--c),#fff 58%),var(--c) 52%,color-mix(in srgb,var(--c),#000 30%))}
+.ey{position:absolute;left:-7px;top:-10px;width:14px;height:20px;border-radius:50%;background:#1d2b36;box-shadow:0 0 0 2px rgba(255,255,255,.75);animation:blink 4s infinite}
+.ey::after{content:'';position:absolute;left:3px;top:3px;width:5px;height:6px;border-radius:50%;background:#fff}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.ck{position:absolute;left:-11px;top:-7px;width:22px;height:14px;border-radius:50%;background:rgba(255,110,150,.5)}
+.mo{position:absolute;left:-9px;top:-6px;width:18px;height:10px;border:3px solid #1d2b36;border-top:0;border-radius:0 0 18px 18px;transform-origin:50% 0}
+.yay .mo{animation:yay .35s infinite alternate}@keyframes yay{to{transform:scaleY(2.2);background:#c0455e}}
+.sh{position:absolute;left:-70px;top:-70px;width:140px;height:140px;border-radius:50%;background:radial-gradient(rgba(0,0,0,.28),transparent 66%);transform:rotateX(90deg)}
+.bar{display:none;position:absolute;left:-150px;top:-6px;width:300px;height:12px;border-radius:6px;background:linear-gradient(#d2a673,#8b6440)}
+.bar::before,.bar::after{content:'';position:absolute;top:6px;width:10px;height:var(--ph);background:#9b7b5c;border-radius:5px}.bar::before{left:0}.bar::after{right:0}
+.mv-ayun .bar{display:block}
+/* gerakan sendi (rehat) */
+.hd{animation:hn 3s ease-in-out infinite}@keyframes hn{50%{transform:rotateZ(5deg) rotateX(5deg)}}
+.tail{animation:tw 1.3s ease-in-out infinite}@keyframes tw{0%,100%{transform:rotateX(-70deg) rotateZ(-16deg)}50%{transform:rotateX(-70deg) rotateZ(16deg)}}
+.tf{animation:tf 1s ease-in-out infinite}@keyframes tf{0%,100%{transform:rotateY(-26deg)}50%{transform:rotateY(26deg)}}
+.ea{transform:rotateZ(calc(var(--sg)*var(--ba)));animation:ew 2.6s ease-in-out infinite}@keyframes ew{50%{transform:rotateZ(calc(var(--sg)*var(--ba) - var(--sg)*9deg))}}
+.a{transform:rotateZ(calc(var(--sg)*12deg));animation:ia 3s ease-in-out infinite}@keyframes ia{50%{transform:rotateZ(calc(var(--sg)*20deg))}}
+.wy{animation:fw 1.4s ease-in-out infinite alternate}@keyframes fw{from{transform:rotateY(calc(var(--sg)*-8deg))}to{transform:rotateY(calc(var(--sg)*50deg))}}
+/* torso rehat */
+.tr{animation:brt 3s ease-in-out infinite}@keyframes brt{50%{transform:rotateX(-3deg) scale(1.015)}}
+/* gerak edar (jalan berpusing) */
+.mv-edar .ob,.mv-kupu .ob{animation:orb 8s linear infinite}@keyframes orb{to{transform:rotateY(360deg)}}
+.mv-edar .pl{transform:translateZ(120px) rotateY(90deg)}.mv-kupu .pl{transform:translateZ(90px) rotateY(90deg)}
+.mv-edar .rt{animation:wb .5s ease-in-out infinite}@keyframes wb{50%{transform:translateY(-8px)}}
+.mv-edar .tr{animation:wt 1s ease-in-out infinite}@keyframes wt{0%,100%{transform:rotateX(-5deg) rotateY(7deg)}50%{transform:rotateX(-5deg) rotateY(-7deg)}}
+.mv-edar .hd{animation:whd 1s ease-in-out infinite}@keyframes whd{0%,100%{transform:rotateY(-7deg) rotateX(5deg)}50%{transform:rotateY(7deg) rotateX(5deg)}}
+.mv-edar .a{animation:swa 1s ease-in-out var(--dl) infinite}@keyframes swa{0%,100%{transform:rotateZ(calc(var(--sg)*10deg)) rotateX(40deg)}50%{transform:rotateZ(calc(var(--sg)*10deg)) rotateX(-40deg)}}
+.mv-edar .lg{animation:swl 1s ease-in-out var(--dl) infinite}@keyframes swl{0%,100%{transform:rotateX(32deg)}50%{transform:rotateX(-32deg)}}
+.mv-edar .kn{animation:kn 1s ease-in-out var(--dl) infinite}@keyframes kn{0%,100%{transform:rotateX(-6deg)}50%{transform:rotateX(-60deg)}}
+.mv-edar .el{animation:elb 1s ease-in-out var(--dl) infinite}@keyframes elb{0%,100%{transform:rotateX(-8deg)}50%{transform:rotateX(-55deg)}}
+/* layangan: tunduk + lutut bengkok + hayun tangan (momentum) -> tolak -> melayang -> mendarat */
+.mv-layang .rt{animation:lp 2.8s ease-in-out infinite}
+@keyframes lp{0%,8%,100%{transform:none}26%{transform:translateY(calc(var(--L)*.33))}34%{transform:translateY(-12px)}50%{transform:translateY(-100px)}62%{transform:translateY(-80px)}77%{transform:translateY(0)}86%{transform:translateY(calc(var(--L)*.33))}}
+.mv-layang .tr{animation:lt 2.8s ease-in-out infinite}@keyframes lt{0%,8%,100%{transform:rotateX(0)}26%{transform:rotateX(-32deg)}34%{transform:rotateX(10deg)}50%{transform:rotateX(-6deg)}62%{transform:rotateX(-12deg)}78%{transform:rotateX(-6deg)}86%{transform:rotateX(-28deg)}}
+.mv-layang .hd{animation:lh 2.8s ease-in-out infinite}@keyframes lh{0%,8%,100%{transform:rotateX(0)}26%{transform:rotateX(26deg)}34%{transform:rotateX(-8deg)}50%{transform:rotateX(4deg)}86%{transform:rotateX(22deg)}}
+.mv-layang .lg{animation:ll 2.8s ease-in-out infinite}@keyframes ll{0%,8%,100%{transform:rotateX(0)}26%{transform:rotateX(58deg)}34%{transform:rotateX(-4deg)}42%{transform:rotateX(-14deg)}50%,62%{transform:rotateX(calc(var(--sg)*22deg + 38deg))}70%{transform:rotateX(28deg)}78%{transform:rotateX(18deg)}86%{transform:rotateX(58deg)}}
+.mv-layang .kn{animation:lk 2.8s ease-in-out infinite}@keyframes lk{0%,8%,100%{transform:rotateX(0)}26%{transform:rotateX(-100deg)}34%{transform:rotateX(-2deg)}42%{transform:rotateX(-30deg)}50%,62%{transform:rotateX(-70deg)}70%{transform:rotateX(-25deg)}78%{transform:rotateX(-12deg)}86%{transform:rotateX(-100deg)}}
+.mv-layang .a{animation:la 2.8s ease-in-out infinite}@keyframes la{0%,8%,100%{transform:rotateZ(calc(var(--sg)*10deg))}26%{transform:rotateX(-75deg) rotateZ(calc(var(--sg)*10deg))}34%{transform:rotateX(120deg) rotateZ(calc(var(--sg)*15deg))}50%,62%{transform:rotateX(165deg) rotateZ(calc(var(--sg)*25deg))}70%{transform:rotateX(100deg) rotateZ(calc(var(--sg)*35deg))}86%{transform:rotateX(65deg) rotateZ(calc(var(--sg)*15deg))}}
+.mv-layang .el{animation:le 2.8s ease-in-out infinite}@keyframes le{0%,8%,100%{transform:rotateX(-8deg)}26%{transform:rotateX(-15deg)}34%{transform:rotateX(-35deg)}50%{transform:rotateX(-12deg)}86%{transform:rotateX(-30deg)}}
+.mv-layang .fl{animation:lfl 2.8s ease-in-out infinite}@keyframes lfl{0%,8%,100%{transform:rotateZ(calc(var(--sg)*10deg))}26%{transform:rotateX(-60deg) rotateZ(calc(var(--sg)*15deg))}34%,46%,58%{transform:rotateZ(calc(var(--sg)*125deg))}40%,52%,64%{transform:rotateZ(calc(var(--sg)*35deg))}72%{transform:rotateZ(calc(var(--sg)*70deg))}86%{transform:rotateZ(calc(var(--sg)*20deg))}}
+.mv-layang .sh{animation:shj 2.8s ease-in-out infinite}@keyframes shj{0%,30%,77%,100%{transform:rotateX(90deg)}50%{transform:rotateX(90deg) scale(.55);opacity:.5}}
+/* imbangan: pindah berat badan, tunduk, kaki belakang diangkat, tangan dibentang */
+.mv-imbang .rt{animation:ib 4.5s ease-in-out infinite alternate}@keyframes ib{0%{transform:none}35%{transform:translateX(-22px)}50%{transform:translateX(-22px) rotateZ(-3deg)}65%{transform:translateX(-22px) rotateZ(2deg)}80%,100%{transform:translateX(-22px) rotateZ(-1deg)}}
+.mv-imbang .tr{animation:ibt 4.5s ease-in-out infinite alternate}@keyframes ibt{0%{transform:rotateX(0)}35%,100%{transform:rotateX(-38deg)}}
+.mv-imbang .hd{animation:ibh 4.5s ease-in-out infinite alternate}@keyframes ibh{0%{transform:rotateX(0)}35%,100%{transform:rotateX(34deg)}}
+.mv-imbang .lg{animation:ibl 4.5s ease-in-out infinite alternate}@keyframes ibl{0%{transform:rotateX(0)}35%,100%{transform:rotateX(calc((1 - var(--sg))*-42deg))}}
+.mv-imbang .kn{animation:ibk 4.5s ease-in-out infinite alternate}@keyframes ibk{0%{transform:rotateX(0)}35%,100%{transform:rotateX(calc((1 - var(--sg))*-5deg - 6deg))}}
+.mv-imbang .a{animation:iba 4.5s ease-in-out infinite alternate}@keyframes iba{0%{transform:rotateZ(calc(var(--sg)*10deg))}35%,100%{transform:rotateZ(calc(var(--sg)*88deg))}}
+/* putaran: pusingan balas, tangan dirapatkan semasa berputar */
+.mv-putar .rt{animation:pt 3.2s ease-in-out infinite}@keyframes pt{0%{transform:rotateY(0)}15%{transform:rotateY(-40deg) translateY(calc(var(--L)*.12))}22%{transform:translateY(-6px) rotateY(60deg)}62%{transform:translateY(-8px) rotateY(690deg)}85%,100%{transform:rotateY(720deg)}}
+.mv-putar .tr{animation:ptt 3.2s ease-in-out infinite}@keyframes ptt{0%,85%,100%{transform:rotateY(0)}15%{transform:rotateY(32deg)}}
+.mv-putar .a{animation:pta 3.2s ease-in-out infinite}@keyframes pta{0%{transform:rotateZ(calc(var(--sg)*80deg))}15%{transform:rotateZ(calc(var(--sg)*100deg))}25%,62%{transform:rotateZ(calc(var(--sg)*22deg)) rotateX(-18deg)}85%,100%{transform:rotateZ(calc(var(--sg)*85deg))}}
+.mv-putar .lg{animation:ptl 3.2s ease-in-out infinite}@keyframes ptl{0%,85%,100%{transform:rotateX(0)}15%{transform:rotateX(24deg)}}
+.mv-putar .kn{animation:ptk 3.2s ease-in-out infinite}@keyframes ptk{0%,85%,100%{transform:rotateX(0)}15%{transform:rotateX(-48deg)}}
+/* gulingan: bongkok, tangan ke lantai, melengkung, golek, bangun */
+.mv-guling .rt{animation:gl 3.6s ease-in-out infinite alternate}
+@keyframes gl{0%{transform:translate3d(0,0,-70px)}10%{transform:translate3d(0,calc(var(--L)*.33),-70px)}20%{transform:translate3d(0,calc(var(--L)*.7),-60px)}80%{transform:translate3d(0,calc(var(--L)*.7),60px) rotateX(360deg)}90%{transform:translate3d(0,calc(var(--L)*.33),70px) rotateX(360deg)}100%{transform:translate3d(0,0,70px) rotateX(360deg)}}
+.mv-guling .tr{animation:glt 3.6s ease-in-out infinite alternate}@keyframes glt{0%,100%{transform:rotateX(0)}10%{transform:rotateX(-35deg)}20%,80%{transform:rotateX(-60deg)}90%{transform:rotateX(-20deg)}}
+.mv-guling .lg{animation:gll 3.6s ease-in-out infinite alternate}@keyframes gll{0%,100%{transform:rotateX(0)}10%{transform:rotateX(55deg)}20%,80%{transform:rotateX(115deg)}}
+.mv-guling .kn{animation:glk 3.6s ease-in-out infinite alternate}@keyframes glk{0%,100%{transform:rotateX(0)}10%{transform:rotateX(-90deg)}20%,80%{transform:rotateX(-125deg)}}
+.mv-guling .a{animation:gla 3.6s ease-in-out infinite alternate}@keyframes gla{0%,100%{transform:rotateZ(calc(var(--sg)*10deg))}10%{transform:rotateX(95deg) rotateZ(calc(var(--sg)*8deg))}20%,80%{transform:rotateX(110deg) rotateZ(calc(var(--sg)*8deg))}}
+.mv-guling .hd{animation:glh 3.6s ease-in-out infinite alternate}@keyframes glh{0%,100%{transform:none}20%,80%{transform:rotateX(45deg)}}
+/* ayunan */
+.mv-ayun .pv{animation:ay 2.4s ease-in-out infinite}@keyframes ay{0%,100%{transform:rotateX(32deg)}50%{transform:rotateX(-32deg)}}
+.mv-ayun .tr{animation:ayt 2.4s ease-in-out infinite}@keyframes ayt{0%,100%{transform:rotateX(8deg)}50%{transform:rotateX(-14deg)}}
+.mv-ayun .a{animation:none;transform:rotateZ(calc(var(--sg)*178deg))}
+.mv-ayun .lg{animation:ayl 2.4s ease-in-out -.3s infinite}@keyframes ayl{0%,100%{transform:rotateX(-22deg)}50%{transform:rotateX(30deg)}}
+.mv-ayun .kn{animation:ayk 2.4s ease-in-out -.3s infinite}@keyframes ayk{0%,100%{transform:rotateX(-35deg)}50%{transform:rotateX(-5deg)}}
+/* mendarat: jatuh, serap hentakan dengan lutut + tunduk, tangan ke hadapan, bangun stabil */
+.mv-darat .rt{animation:dr 3s infinite}
+@keyframes dr{0%{transform:translateY(-190px);animation-timing-function:cubic-bezier(.5,0,1,.6)}38%{transform:none}46%{transform:translateY(calc(var(--L)*.36))}62%{transform:translateY(calc(var(--L)*.33))}82%,100%{transform:none}}
+.mv-darat .tr{animation:drt 3s infinite}@keyframes drt{0%{transform:rotateX(4deg)}38%{transform:rotateX(-5deg)}46%,62%{transform:rotateX(-30deg)}82%,100%{transform:rotateX(0)}}
+.mv-darat .hd{animation:drh 3s infinite}@keyframes drh{0%,38%,82%,100%{transform:none}46%,62%{transform:rotateX(26deg)}}
+.mv-darat .lg{animation:drl 3s infinite}@keyframes drl{0%,38%{transform:rotateX(14deg)}46%,62%{transform:rotateX(58deg)}82%,100%{transform:rotateX(0)}}
+.mv-darat .kn{animation:drk 3s infinite}@keyframes drk{0%,38%{transform:rotateX(-14deg)}46%,62%{transform:rotateX(-100deg)}82%,100%{transform:rotateX(0)}}
+.mv-darat .a{animation:dra 3s infinite}@keyframes dra{0%,38%{transform:rotateX(40deg) rotateZ(calc(var(--sg)*100deg))}46%,62%{transform:rotateX(75deg) rotateZ(calc(var(--sg)*20deg))}82%,100%{transform:rotateZ(calc(var(--sg)*15deg))}}
+.mv-darat .sh{animation:shd 3s infinite}@keyframes shd{0%{transform:rotateX(90deg) scale(.3);opacity:.2}38%,100%{transform:rotateX(90deg)}}
+/* hamburan: lutut bengkok, badan tunduk, hayun tangan, tolak berulang */
+.mv-hambur .rt{animation:hb 1.1s ease-in-out infinite}@keyframes hb{0%,100%{transform:translateY(calc(var(--L)*.25))}35%{transform:translateY(-70px)}55%{transform:translateY(-60px)}85%{transform:translateY(calc(var(--L)*.05))}}
+.mv-hambur .tr{animation:hbt 1.1s ease-in-out infinite}@keyframes hbt{0%,100%{transform:rotateX(-20deg)}35%{transform:rotateX(6deg)}55%{transform:rotateX(-4deg)}85%{transform:rotateX(-14deg)}}
+.mv-hambur .hd{animation:hbh 1.1s ease-in-out infinite}@keyframes hbh{0%,100%{transform:rotateX(18deg)}35%{transform:rotateX(-6deg)}}
+.mv-hambur .lg{animation:hbl 1.1s ease-in-out infinite}@keyframes hbl{0%,100%{transform:rotateX(45deg)}35%{transform:rotateX(0)}55%{transform:rotateX(15deg)}85%{transform:rotateX(35deg)}}
+.mv-hambur .kn{animation:hbk 1.1s ease-in-out infinite}@keyframes hbk{0%,100%{transform:rotateX(-75deg)}35%{transform:rotateX(-3deg)}55%{transform:rotateX(-25deg)}85%{transform:rotateX(-60deg)}}
+.mv-hambur .a{animation:hba 1.1s ease-in-out infinite}@keyframes hba{0%,100%{transform:rotateX(-55deg) rotateZ(calc(var(--sg)*12deg))}35%{transform:rotateX(150deg) rotateZ(calc(var(--sg)*20deg))}55%{transform:rotateX(120deg) rotateZ(calc(var(--sg)*25deg))}85%{transform:rotateX(0) rotateZ(calc(var(--sg)*12deg))}}
+.mv-hambur .sh{animation:shb 1.1s ease-in-out infinite}@keyframes shb{0%,100%{transform:rotateX(90deg)}35%{transform:rotateX(90deg) scale(.6);opacity:.5}}
+/* gerak edar kreatif (terbang) */
+.mv-kupu .rt{animation:kp 1.6s ease-in-out infinite}@keyframes kp{0%,100%{transform:translateY(-10px) rotateZ(-5deg)}50%{transform:translateY(-60px) rotateZ(5deg)}}
+.mv-kupu .tr{animation:kt 1.6s ease-in-out infinite}@keyframes kt{0%,100%{transform:rotateX(-14deg)}50%{transform:rotateX(-4deg)}}
+.mv-kupu .wy{animation-duration:.3s}
+/* reaksi gembira */
+.mv-cheer .rt{animation:ch .5s ease-in-out infinite alternate}@keyframes ch{to{transform:translateY(-26px) rotateZ(4deg)}}
+.mv-cheer .tr{animation:cht .5s ease-in-out infinite alternate}@keyframes cht{from{transform:rotateX(6deg)}to{transform:rotateX(-8deg)}}
+.mv-cheer .a:not(.wy){animation:cha .5s ease-in-out infinite alternate}@keyframes cha{from{transform:rotateZ(calc(var(--sg)*120deg))}to{transform:rotateZ(calc(var(--sg)*155deg))}}
+.mv-cheer .ob,.mv-cheer .pl{animation:none;transform:none}
+</style>
+</head>
+<body>
+
+<section class="page on" id="utama">
+  <div class="hero">
+    <div class="sun">☀️</div><div class="cloud" style="top:40px;left:6%">☁️</div><div class="cloud" style="top:130px;right:10%">☁️</div><div class="bal" style="bottom:140px;left:8%">🎈</div><div class="bal" style="bottom:200px;right:9%;animation-delay:-2s">🎈</div><div class="bal" style="bottom:70px;right:5%;animation-delay:-1s">⭐</div>
+    <div class="mascot">🐸</div>
+    <h1>Jom Kenali Gimnas</h1>
+    <p class="bubble">Hai kawan! Mari bergerak dan belajar bersama-sama! 🤸</p>
+    <p><button class="btn o" onclick="document.getElementById('mula').scrollIntoView()">Mula Bermain! ⬇️</button></p>
+    <div class="grass"></div>
+  </div>
+  <div class="wrap" id="mula">
+    <h2>Siapakah Gimi? 🐸</h2>
+    <p>Gimi ialah katak kecil yang suka melompat. Gimi mempunyai ramai rakan haiwan yang akan menunjukkan cara melakukan setiap gerakan gimnastik. Marilah kita mengenali mereka!</p>
+    <div class="friends" id="friends"></div>
+    <div class="box" style="margin-top:22px;background:#eefaf3"><h3>🎯 Matlamat Pembelajaran</h3>
+      <p style="margin:4px 0">Selepas menjelajah laman web ini, kamu akan dapat:</p>
+      <ol style="margin:4px 0;padding-left:22px"><li>Menerangkan maksud gimnastik artistik dan pergerakan kreatif.</li><li>Mengenal pasti lapan gerakan asas gimnastik artistik.</li><li>Menerangkan konsep kesedaran ruang.</li><li>Mengamalkan langkah keselamatan semasa bergimnastik.</li></ol></div>
+    <h2 style="margin-top:26px">🗺️ Peta Pengembaraan</h2>
+    <p>Singgah di setiap hentian. Hentian yang telah dilawati ditandakan ✔.</p>
+    <div class="stops" id="peta"></div><div class="pb"><i id="pbi"></i></div><p id="pbt" style="text-align:center;margin:0;font-size:.9rem"></p>
+    <h2 style="margin-top:30px">Apakah yang Akan Kita Pelajari?</h2>
+    <div class="grid">
+      <button class="tile" style="background:#ffd9c2" onclick="go('pengenalan')"><span>📖</span>Pengenalan</button>
+      <button class="tile" style="background:#c9efd9" onclick="go('artistik')"><span>🤸</span>Gimnastik Artistik</button>
+      <button class="tile" style="background:#fbd3e1" onclick="go('kreatif')"><span>🦋</span>Pergerakan Kreatif</button>
+      <button class="tile" style="background:#dcd3fa" onclick="go('kuiz')"><span>🏆</span>Kuiz</button>
+    </div>
+    <h2 style="margin-top:30px">Mengapakah Gimnastik Baik untuk Badan? 💪</h2>
+    <div class="grid">
+      <div class="box" style="text-align:center"><span style="font-size:2.4rem">💪</span><br><b>Kekuatan</b><br>Otot menjadi lebih kuat.</div>
+      <div class="box" style="text-align:center"><span style="font-size:2.4rem">⚖️</span><br><b>Imbangan</b><br>Badan lebih stabil.</div>
+      <div class="box" style="text-align:center"><span style="font-size:2.4rem">🤸</span><br><b>Fleksibiliti</b><br>Badan lebih lentur.</div>
+      <div class="box" style="text-align:center"><span style="font-size:2.4rem">🧠</span><br><b>Koordinasi</b><br>Gerakan lebih terkawal.</div>
+    </div>
+    <h2 style="margin-top:30px">Tahukah Kamu? 💡</h2>
+    <div class="fact" id="fact"></div>
+    <p style="text-align:center"><button class="btn" onclick="nextFact()">Fakta Seterusnya ➡️</button></p>
+    <h2 style="margin-top:26px">Cabaran Hari Ini 🎯</h2>
+    <div class="fact" id="chal" style="background:#fff9e0">🎯 Berdiri dengan satu kaki selama lima saat seperti Fifi si flamingo.</div>
+    <p style="text-align:center"><button class="btn o" onclick="nextC()">Cabaran Lain 🔄</button></p>
+    <h2 style="margin-top:20px">Panggung Animasi 🎬</h2>
+    <button class="tile" style="width:100%;background:#d3ecf6" onclick="go('video')"><div class="scene" style="background:none;margin:0"><span>🐠</span><span>🦘</span><span>🦩</span></div>Tonton animasi 3D haiwan melakukan gerakan</button>
+    <div class="note safe" style="margin-top:20px">⚠️ <b>Peringatan keselamatan:</b> lakukan pemanasan badan, gunakan tilam dan sentiasa di bawah pengawasan guru.</div>
+  </div>
+</section>
+
+<section class="page" id="pengenalan"><div class="wrap">
+  <h2>Apakah Itu Gimnastik? 📖</h2>
+  <p class="bubble">🐸 "Marilah kita mengenali dua jenis gerakan yang menarik!"</p>
+  <div class="two" style="margin-top:18px">
+    <div class="box" style="background:#eefaf3">
+      <div class="scene"><span>🐒</span><span>🦔</span><span>🐱</span></div>
+      <h3>Gimnastik Artistik</h3>
+      <p>Gimnastik artistik ialah aktiviti pergerakan badan yang terkawal dan berurutan, dilakukan dengan teknik yang betul dan selamat, seperti imbangan, gulingan, putaran dan pendaratan.</p>
+    </div>
+    <div class="box" style="background:#fff1f6">
+      <div class="scene"><span>🦋</span><span>🐦</span><span>🦢</span></div>
+      <h3>Pergerakan Kreatif</h3>
+      <p>Pergerakan kreatif ialah pergerakan yang dicipta secara alami oleh murid atau individu berdasarkan idea, tema atau rangsangan, dengan meneroka unsur ruang, masa, beban dan aliran.</p>
+    </div>
+  </div>
+  <div class="tbl" style="margin-top:18px"><table>
+    <tr><th>Ciri</th><th>Gimnastik Artistik 🤸</th><th>Pergerakan Kreatif 🦋</th></tr>
+    <tr><td>Bentuk gerakan</td><td>Mengikut teknik yang telah ditetapkan.</td><td>Dicipta secara alami oleh murid atau individu.</td></tr>
+    <tr><td>Fokus</td><td>Kawalan badan, ketepatan teknik dan keselamatan.</td><td>Penerokaan idea dan pengungkapan melalui pergerakan.</td></tr>
+    <tr><td>Contoh</td><td>Gulingan, imbangan dan mendarat.</td><td>Bergerak mengikut gaya kupu-kupu atau burung.</td></tr>
+  </table></div>
+  <small class="src">Sumber: Kementerian Pendidikan Malaysia, DSKP/Dokumen Penjajaran KSSR (Semakan 2017) Pendidikan Jasmani dan Pendidikan Kesihatan. Definisi disesuaikan untuk murid sekolah rendah.</small>
+  <p style="text-align:center"><button class="btn" onclick="go('ruang')">Mari Belajar tentang Ruang!</button><button class="btn o" onclick="go('artistik')">Lihat Gerakan</button></p>
+</div></section>
+
+<section class="page" id="ruang"><div class="wrap">
+  <h2>Ke Manakah Saya Bergerak? 🧭</h2>
+  <p>Tema kita ialah <b>Kesedaran Ruang</b>. Klik kad untuk membacanya.</p>
+  <div class="grid" id="ruangGrid"></div>
+  <small class="src">Sumber: KPM, Dokumen Penjajaran KSSR (Semakan 2017) PJPK Tahun 1, standard pembelajaran 1.1.2: kesedaran ruang diri, ruang am dan batasan ruang dalam pelbagai arah dan aras.</small>
+  <p style="text-align:center"><button class="btn o" onclick="go('artistik')">Cuba Gerakan!</button></p>
+</div></section>
+
+<section class="page" id="artistik"><div class="wrap">
+  <h2>Lapan Gerakan Asas Gimnastik 🤸</h2>
+  <p>Klik kad untuk membaliknya, kemudian tekan <b>Tonton Animasi</b>.</p>
+  <div class="box" style="background:#fffbe6;margin-bottom:16px"><h3>🧠 Padat Ilmu: Prinsip Asas Gerakan</h3>
+  <div class="two" style="font-size:.95rem">
+   <div><b>Otot teras</b><br>Otot perut, belakang dan pinggul yang menstabilkan batang tubuh. Otot ini menjadi asas bagi semua gerakan gimnastik.</div>
+   <div><b>Pusat graviti dan tapak sokongan</b><br>Pusat graviti ialah titik tempat berat badan seimbang. Semakin rendah pusat graviti dan semakin luas tapak sokongan, semakin stabil badan.</div>
+   <div><b>Penyerapan daya</b><br>Lutut dan pinggul yang bengkok memanjangkan masa badan berhenti semasa mendarat, lalu mengurangkan daya hentakan.</div>
+   <div><b>Putaran badan</b><br>Badan yang dirapatkan berputar lebih laju, manakala badan yang dibuka berputar lebih perlahan.</div>
+   <div><b>Pemanasan badan</b><br>Pemanasan menyediakan otot dan sendi serta mengurangkan risiko kecederaan.</div>
+   <div><b>Kemajuan beransur-ansur</b><br>Kuasai teknik pada kelajuan perlahan sebelum menambah kesukaran.</div>
+  </div></div>
+  <div class="grid" id="artGrid"></div>
+  <h2 style="margin-top:30px">Rangkaian Gerakan Artistik</h2>
+  <div class="chain" id="artChain"></div>
+  <p style="text-align:center;margin:18px 0"><button class="btn p" onclick="playAll(0,8)">▶️ Tonton Semua Gerakan</button></p>
+  <div class="note safe">⚠️ Lakukan pemanasan badan, gunakan tilam dan minta guru memerhati terlebih dahulu.</div>
+</div></section>
+
+<section class="page" id="kreatif"><div class="wrap">
+  <h2>Jom Cipta Gerakan Kreatif! 🦋</h2>
+  <div class="grid" id="kreGrid"></div>
+  <h2 style="margin-top:30px">Rangkaian Kreatif</h2>
+  <div class="chain"><i>🦋 Gerak Edar</i>➡️<i>🐦 Layangan</i>➡️<i>🦢 Imbangan</i></div>
+  <p style="text-align:center"><button class="btn p" onclick="playAll(8,11)">▶️ Tonton Semua</button></p>
+  <div class="note">💡 Cabaran: pilih satu haiwan kegemaran dan cipta rangkaian gerakan kamu sendiri. Tunjukkan kepada rakan!</div>
+</div></section>
+
+<section class="page" id="video"><div class="wrap">
+  <h2>Panggung Animasi Gimi 🎬</h2>
+  <p>Setiap animasi berdurasi sekitar 20 saat. Jumlah keseluruhan 11 animasi kurang daripada 10 minit.</p>
+  <p style="text-align:center"><button class="btn p" onclick="playAll(0,11)">▶️ Main Semua</button></p>
+  <div class="grid" id="vidGrid"></div>
+</div></section>
+
+<section class="page" id="nota"><div class="wrap">
+  <h2>Nota Pintar Gimi 📒</h2>
+  <div class="note"><b>Gimnastik Artistik:</b> aktiviti pergerakan badan yang terkawal dan berurutan, dilakukan dengan teknik yang betul dan selamat.</div>
+  <div class="note" style="background:#ffe6ef;border-color:var(--rose)"><b>Pergerakan Kreatif:</b> pergerakan yang dicipta secara alami oleh murid atau individu berdasarkan idea, tema atau rangsangan.</div>
+  <div class="note in2"><b>Kesedaran Ruang:</b> kefahaman tentang ruang diri, ruang am, arah, aras dan laluan semasa bergerak.</div>
+
+  <h3 style="margin-top:22px">📜 Sejarah Ringkas Gimnastik</h3>
+  <ul class="tl">
+    <li><b>Zaman Greek purba:</b> latihan jasmani dijalankan di <i>gymnasion</i>, iaitu asas kepada perkataan gimnastik.</li>
+    <li><b>1793:</b> J. C. F. GutsMuths menerbitkan buku teks gimnastik untuk golongan muda, <i>Gymnastik für die Jugend</i>.</li>
+    <li><b>1811:</b> Friedrich Ludwig Jahn membuka <i>Turnplatz</i> (kawasan latihan luar) pertama di Hasenheide, berhampiran Berlin.</li>
+    <li><b>1813:</b> Per Henrik Ling menubuhkan Royal Central Institute of Gymnastics di Stockholm, Sweden.</li>
+    <li><b>1881:</b> Persekutuan gimnastik antarabangsa (kemudian dikenali sebagai FIG) ditubuhkan.</li>
+    <li><b>1896:</b> Gimnastik dipertandingkan dalam Sukan Olimpik moden pertama di Athens.</li>
+    <li><b>1903 dan 1934:</b> Kejohanan Dunia FIG diadakan untuk lelaki (1903) dan wanita (1934).</li>
+  </ul>
+
+  <h3 style="margin-top:22px">👤 Tokoh Pengasas</h3>
+  <div class="two">
+    <div class="box"><b>Friedrich Ludwig Jahn (1778–1852)</b><br>Digelar bapa gimnastik. Beliau menggerakkan gerakan <i>Turnverein</i> (kelab gimnastik) dan mempopularkan penggunaan alatan seperti palang selari dan palang tinggi.</div>
+    <div class="box"><b>J. C. F. GutsMuths</b><br>Pendidik Jerman yang menulis buku teks gimnastik pada 1793. Sesetengah sumber menggelarnya sebagai datuk gimnastik.</div>
+    <div class="box"><b>Per Henrik Ling (1776–1839)</b><br>Membangunkan gimnastik Sweden yang menekankan manfaat kesihatan dan melatih guru.</div>
+    <div class="box"><b>Rudolf Laban (1879–1958)</b><br>Pelopor pendidikan pergerakan. Beliau menulis <i>Modern Educational Dance</i> (1948). Empat faktor pergerakan, iaitu berat, ruang, masa dan aliran, menjadi asas pergerakan kreatif.</div>
+  </div>
+
+  <h3 style="margin-top:22px">🏫 Penerapan dalam Kurikulum Malaysia</h3>
+  <ul>
+    <li>Kurikulum Baru Sekolah Rendah (KBSR) dilaksanakan sepenuhnya pada tahun 1983.</li>
+    <li>Kurikulum Standard Sekolah Rendah (KSSR) mula dilaksanakan pada tahun 2011, kemudian disemak semula sebagai KSSR (Semakan 2017).</li>
+    <li>Gimnastik asas dan pergerakan kreatif diajar dalam mata pelajaran Pendidikan Jasmani dan Pendidikan Kesihatan (PJPK) berdasarkan DSKP.</li>
+    <li>Contohnya, kesedaran ruang diri, ruang am dan batasan ruang diajar pada Tahun 1; guling belakang pada Tahun 3; dan ayunan di atas palang pada Tahun 5.</li>
+  </ul>
+
+  <h3 style="margin-top:22px">🏅 Jenis-jenis Gimnastik</h3>
+  <p style="margin:4px 0">Antara disiplin gimnastik yang diiktiraf oleh Persekutuan Gimnastik Antarabangsa (FIG):</p>
+  <div class="two">
+    <div class="box"><b>Gimnastik Artistik</b><br>Gerakan pada lantai dan alatan seperti palang dan kuda lompat.</div>
+    <div class="box"><b>Gimnastik Berirama</b><br>Gerakan diiringi muzik dengan alat kecil seperti gelung, bola, belantan dan pita.</div>
+    <div class="box"><b>Trampolin</b><br>Lompatan dan jungkir balik di atas trampolin.</div>
+    <div class="box"><b>Gimnastik Aerobik dan Akrobatik</b><br>Rutin bertenaga mengikut muzik (aerobik) dan gerakan berpasangan atau berkumpulan (akrobatik).</div>
+  </div>
+  <h3 style="margin-top:22px">🛠️ Peralatan Gimnastik Artistik</h3>
+  <ul>
+    <li><b>Lelaki (enam alatan):</b> lantai, kuda pommel, gelung, lompat kuda, palang selari dan palang tinggi.</li>
+    <li><b>Wanita (empat alatan):</b> lompat kuda, palang tidak sama tinggi, palang imbangan dan lantai.</li>
+  </ul>
+  <h3 style="margin-top:22px">💪 Manfaat Gimnastik</h3>
+  <ul><li>Meningkatkan kekuatan otot, imbangan, fleksibiliti dan koordinasi.</li><li>Melatih kawalan badan serta kesedaran ruang.</li><li>Memupuk disiplin, keyakinan diri dan sikap mengutamakan keselamatan.</li></ul>
+  <h3 style="margin-top:22px">Istilah Penting</h3>
+  <div class="tbl"><table id="istilah"><tr><th>Istilah</th><th>Maksud</th></tr></table></div>
+  <h3 style="margin-top:20px">Perkara yang Perlu Diingat 💡</h3>
+  <ul><li>Lakukan pemanasan badan terlebih dahulu dan penyejukan badan selepas bergimnastik.</li><li>Gunakan tilam dan pastikan kawasan bebas daripada halangan.</li><li>Pakai pakaian yang selesa.</li><li>Elakkan bergurau semasa bergimnastik.</li></ul>
+  <small class="src">Sumber: Encyclopaedia Britannica (Gymnastics); Abels dan Bridges, <i>Teaching Movement Education</i> (Human Kinetics); KPM, Dokumen Penjajaran KSSR PJPK Tahun 1, 3, 4 dan 5.</small>
+  <button class="btn p" onclick="window.print()">🖨️ Cetak Nota</button>
+</div></section>
+
+<section class="page" id="kuiz"><div class="wrap">
+  <h2>Cabaran Gimi! 🏆</h2>
+  <div id="quiz"></div>
+</div></section>
+
+<section class="page" id="kenapa"><div class="wrap">
+  <h2>Mengapakah Ciri Ini Digunakan? 🧐</h2>
+  <p>Justifikasi fungsi sumber digital untuk pembelajaran bermakna.</p>
+  <div class="tbl"><table>
+    <tr><th>Sumber digital</th><th>Fungsi</th><th>Justifikasi</th></tr>
+    <tr><td>Animasi haiwan</td><td>Menunjukkan gerakan langkah demi langkah</td><td>Gabungan gambar bergerak dan dialog ringkas membantu murid memahami lebih baik berbanding teks sahaja (prinsip pembelajaran multimedia, Mayer, 2009).</td></tr>
+    <tr><td>Nota selepas animasi</td><td>Mengukuhkan konsep</td><td>Maklumat disampaikan sedikit demi sedikit untuk mengurangkan beban kognitif (Sweller, 1988).</td></tr>
+    <tr><td>Kuiz</td><td>Menyemak kefahaman</td><td>Maklum balas serta-merta membantu murid membetulkan kesilapan.</td></tr>
+    <tr><td>Watak haiwan dan Gimi</td><td>Menarik minat</td><td>Sesuai dengan tahap kanak-kanak sekolah rendah.</td></tr>
+    <tr><td>Kad boleh balik</td><td>Meringkaskan maklumat</td><td>Maklumat dipecahkan kepada bahagian kecil yang mudah diingat.</td></tr>
+  </table></div>
+</div></section>
+
+<div class="ov" id="lesson" role="dialog" aria-modal="true"><div class="ovbox">
+  <button class="x" onclick="closeL()" aria-label="Tutup">✖</button>
+  <div class="stage" id="st"><div class="bub" id="bub"></div><div class="cam" id="cam"></div></div>
+  <p style="text-align:center;margin:6px"><button class="btn" onclick="playL()">🔁 Ulang</button></p><p style="text-align:center;margin:0;font-size:.85rem">↔️ Seret pada animasi untuk memutar haiwan</p>
+  <div class="notes" id="notes"></div>
+</div></div>
+
+<button class="top" onclick="scrollTo(0,0)" aria-label="Ke atas">⬆️</button>
+<nav>
+  <button data-p="utama" class="on" onclick="go('utama')"><span>🏠</span>Utama</button>
+  <button data-p="artistik" onclick="go('artistik')"><span>🤸</span>Belajar</button>
+  <button data-p="video" onclick="go('video')"><span>🎬</span>Animasi</button>
+  <button data-p="kuiz" onclick="go('kuiz')"><span>🏆</span>Kuiz</button>
+  <button data-p="nota" onclick="go('nota')"><span>📒</span>Nota</button>
+  <button data-p="kenapa" onclick="go('kenapa')"><span>🧐</span>Info</button>
+</nav>
+
+<script>
+const vis=new Set(['utama']);
+function go(id){
+  vis.add(id);
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id===id));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.p===id));
+  scrollTo(0,0);renderMap();
+}
+const stopL=[['pengenalan','📖','Pengenalan'],['ruang','🧭','Ruang'],['artistik','🤸','Gerakan'],['nota','📒','Nota'],['kuiz','🏆','Kuiz']];
+function renderMap(){const q=stopL.filter(x=>vis.has(x[0])).length,pb=document.getElementById('pbi');if(pb){pb.style.width=q/stopL.length*100+'%';document.getElementById('pbt').textContent=q+' daripada '+stopL.length+' hentian telah dilawati'}const e=document.getElementById('peta');if(e)e.innerHTML=stopL.map(x=>`<button class="stop ${vis.has(x[0])?'v':''}" onclick="go('${x[0]}')"><span>${x[1]}</span>${x[2]} ${vis.has(x[0])?'✔':''}</button>`).join('')}
+const F=['Gimnastik dipertandingkan dalam setiap Sukan Olimpik musim panas moden sejak tahun 1896.','Perkataan gimnastik berasal daripada tradisi gymnasion di Greek purba.','Rudolf Laban mengenal pasti empat faktor pergerakan: berat, ruang, masa dan aliran.','Persekutuan gimnastik antarabangsa ditubuhkan pada 1881 dan merupakan antara persekutuan sukan antarabangsa yang tertua.','Landak boleh menggulung badan menjadi bulat. Ini mirip dengan gerakan gulingan!','Flamingo sering berdiri dengan satu kaki dalam tempoh yang lama, sama seperti gerakan imbangan.','Gimnas artistik lelaki bertanding pada enam alatan, manakala gimnas artistik wanita bertanding pada empat alatan.','Badan yang dirapatkan berputar lebih laju daripada badan yang dibuka. Itulah sebabnya gimnas merapatkan badan semasa berputar.','Penyejukan badan selepas bergimnastik membantu otot kembali tenang secara beransur-ansur.'];
+let fi=0;function nextFact(){fi=(fi+1)%F.length;document.getElementById('fact').textContent='🌟 '+F[fi]}
+const C=['Berdiri dengan satu kaki selama lima saat seperti Fifi si flamingo.','Bergerak dalam ruang diri pada tiga aras: tinggi, sederhana dan rendah.','Melompat dan mendarat dengan lutut bengkok seperti Mochi si kucing.','Cipta satu gerakan kupu-kupu dan tunjukkan kepada rakan.','Bergerak mengikut laluan zig-zag dengan perlahan dan terkawal.'];let ci=0;function nextC(){ci=(ci+1)%C.length;document.getElementById('chal').textContent='🎯 '+C[ci]}
+const cols=['#ffd9c2','#c9efd9','#fbd3e1','#dcd3fa','#cfe9f5','#fdeaa8','#f9cfcf','#c8ece6'];
+const KPM='Kementerian Pendidikan Malaysia, ';
+// [gerakan, emoji, nama haiwan, kelas animasi, nota, langkah, tahukah kau, sumber]
+const M=[
+['Gerak Edar','🐠','Nimo','edar','Gerak edar ialah pergerakan berpindah dari satu tempat ke tempat lain dalam ruang dengan menggunakan pelbagai cara, arah, aras dan laluan.',['Berdiri tegak dan pandang ke hadapan','Bergerak dengan terkawal mengikut laluan','Tukar arah dengan perlahan'],'Gerak edar boleh dilakukan dalam ruang besar atau ruang kecil dan membantu murid menyedari ruang di sekeliling.',KPM+'Dokumen Penjajaran PJPK Tahun 1 (kesedaran ruang)',['Otot kaki (kuadriseps, hamstring dan betis) serta otot teras yang menstabilkan badan.','Bergerak terlalu laju sehingga berlanggar dengan rakan.','Kekalkan ruang diri, pandang ke hadapan dan bergerak dengan kawalan.']],
+['Layangan','🦘','Kanggi','layang','Layangan ialah gerakan melompat dan melayang di udara dengan bentuk badan yang terkawal sebelum mendarat dengan selamat.',['Bengkokkan lutut','Tolak lantai dan lompat ke atas','Mendarat dengan lutut bengkok'],'Layangan ialah salah satu kemahiran kesedaran tubuh badan, bersama bentuk, imbangan dan pemindahan berat badan.',KPM+'Dokumen Penjajaran PJPK Tahun 1',['Otot kaki (kuadriseps, gluteus dan betis) menghasilkan daya tolakan; otot teras mengawal bentuk badan di udara.','Lutut lurus semasa mendarat dan tidak menggunakan hayunan tangan.','Pastikan permukaan pendaratan bertilam dan ruang bebas daripada halangan.']],
+['Imbangan','🦩','Fifi','imbang','Imbangan ialah keupayaan menahan badan dalam keadaan stabil dengan mengekalkan pusat graviti di atas tapak sokongan.',['Berdiri dengan satu kaki','Depakan tangan di kedua-dua sisi','Tahan badan selama tiga saat'],'Imbangan lebih mudah dikekalkan jika pandangan ditumpukan pada satu titik tetap di hadapan.',KPM+'Dokumen Penjajaran PJPK Tahun 1 dan Tahun 5',['Otot teras, pinggul dan buku lali menyesuaikan badan untuk mengekalkan pusat graviti.','Pandangan beralih-alih dan badan terlalu tegang.','Mulakan dengan tapak sokongan yang luas sebelum mengecilkannya.']],
+['Putaran','🐧','Pipo','putar','Putaran ialah gerakan memusingkan badan pada satu paksi, iaitu garisan tengah badan.',['Berdiri tegak dan rapatkan badan','Berpusing dengan perlahan','Berhenti dan imbangkan badan semula'],'Putaran dipelajari bersama konsep pergerakan dan prinsip mekanik.',KPM+'Dokumen Penjajaran PJPK Tahun 4, standard kandungan 2.3',['Otot teras dan pinggul mengawal putaran di sekeliling paksi badan; tumpuan pandangan membantu mengelak pening.','Badan tidak tegak sehingga hilang imbangan atau berputar terlalu laju.','Putar perlahan dahulu, berhenti jika pening dan pastikan ruang bebas.']],
+['Gulingan','🦔','Hedi','guling','Gulingan ialah gerakan menggolek badan ke hadapan, ke belakang atau ke sisi dengan badan yang melengkung.',['Bongkokkan badan seperti bola','Letakkan tangan dan golek dengan perlahan','Bangun dengan terkawal'],'Pada akhir guling belakang, murid menolak lantai dengan tangan (Tahun 3, SP 2.3.2).',KPM+'Dokumen Penjajaran PJPK Tahun 3',['Otot teras dan belakang mengekalkan badan melengkung; bahu dan tangan menyokong berat badan.','Kepala diletakkan di atas lantai atau badan tidak melengkung.','Rapatkan dagu ke dada, golek pada bahagian atas belakang dan gunakan tilam.']],
+['Ayunan','🐒','Mimi','ayun','Ayunan ialah gerakan mengayun badan ke hadapan dan ke belakang sambil berpaut atau disokong oleh tangan.',['Pegang dengan kuat menggunakan kedua-dua tangan','Ayun badan dengan perlahan','Kawal badan dan berhenti dengan stabil'],'Murid belajar menyokong badan di atas palang dengan kedua-dua belah tangan dan mengayun (Tahun 5, SP 1.4.1).',KPM+'Dokumen Penjajaran PJPK Tahun 5',['Otot lengan, bahu, genggaman dan teras menyokong serta mengawal hayunan.','Genggaman tidak kuat atau pegangan dilepaskan terlalu awal.','Periksa peralatan, sediakan tilam dan lakukan di bawah pengawasan guru.']],
+['Mendarat','🐱','Mochi','darat','Mendarat ialah menyentuh lantai dengan selamat dan stabil selepas melompat.',['Bengkokkan lutut','Rapatkan kaki dan stabilkan badan','Depankan tangan untuk mengimbang'],'Lutut yang dibengkokkan membantu badan menyerap hentakan semasa mendarat.',KPM+'Dokumen Penjajaran PJPK Tahun 1 hingga 5 (kemahiran gimnastik asas)',['Otot kaki dan pinggul menyerap daya hentakan melalui lutut dan pinggul yang bengkok.','Lutut lurus atau kaki terlalu terbuka sehingga badan tidak stabil.','Mendarat di atas tilam dengan lutut sejajar dengan jari kaki.']],
+['Hamburan','🐰','Bobo','hambur','Hamburan ialah gerakan melantun atau melompat berulang kali dengan tolakan daripada lantai.',['Bengkokkan lutut','Tolak lantai dengan kuat','Mendarat dan melompat semula'],'Hamburan memerlukan tenaga kaki dan kawalan badan yang baik.',KPM+'Dokumen Penjajaran PJPK (kemahiran gimnastik asas)',['Otot kaki (betis dan kuadriseps) serta otot teras menghasilkan daya tolakan berulang.','Tolakan tidak serentak dan pendaratan tidak terkawal.','Lompat dalam ruang yang mencukupi dan berehat apabila letih.']],
+['Gerak Edar Kreatif','🦋','Kupi','kupu','Gerak edar kreatif ialah pergerakan dalam ruang yang dicipta secara alami oleh murid, contohnya bergerak mengikut gaya kupu-kupu.',['Pilih haiwan kegemaran','Bergerak mengikut gaya haiwan itu','Tambah gaya sendiri'],'Pergerakan kreatif berdasarkan tema melibatkan unsur ruang, masa, beban dan aliran.',KPM+'Dokumen Penjajaran PJPK Tahun 4 (pergerakan kreatif berdasarkan tema)',['Pergerakan kreatif meneroka ruang, masa, beban dan aliran melalui rangsangan seperti haiwan.','Meniru tanpa meneroka variasi gerakan.','Beri murid peluang mencipta, mempersembahkan dan membuat refleksi.']],
+['Layangan Kreatif','🐦','Tiara','layang','Layangan kreatif ialah gerakan melompat dan melayang dengan gaya burung yang terbang tinggi.',['Bengkokkan lutut','Lompat sambil mengibaskan tangan','Mendarat dengan lembut'],'Cuba ubah aras: melompat tinggi, kemudian mendarat pada aras rendah.',KPM+'Dokumen Penjajaran PJPK Tahun 1',['Otot kaki menghasilkan lompatan; tangan dan badan mengungkap gaya burung.','Lompat tanpa mengawal pendaratan.','Pastikan ruang mencukupi dan pendaratan stabil.']],
+['Imbangan Kreatif','🦢','Ayu','imbang','Imbangan kreatif ialah menahan badan dalam bentuk yang dicipta sendiri, seperti angsa yang tenang.',['Berdiri dengan satu kaki','Bentuk tangan seperti leher angsa','Tahan bentuk badan dengan tenang'],'Cuba pelbagai bentuk badan yang berbeza semasa mengimbang.',KPM+'Dokumen Penjajaran PJPK Tahun 1',['Otot teras dan kaki mengekalkan imbangan sementara bentuk badan dicipta secara kreatif.','Bentuk badan terlalu rumit sehingga hilang imbangan.','Mulakan dengan bentuk mudah dan tambah secara beransur-ansur.']]
+];
+const nm=i=>M[i][0];
+function card(i,j){const m=M[i];return `<div class="card" tabindex="0" onclick="this.classList.toggle('flip')" onkeydown="if(event.key==='Enter')this.classList.toggle('flip')"><div class="in">
+ <div class="f" style="background:${cols[j%8]}"><span>${m[1]}</span><h3>${m[0]}</h3><small>bersama ${m[2]}</small></div>
+ <div class="b"><div class="bs"><b>${m[0]}</b><p style="margin:4px 0">${m[4]}</p><div class="mini"><b>💪 Otot:</b> ${m[8][0]}<br><b>⚠️ Elakkan:</b> ${m[8][1]}</div></div><button class="btn p" onclick="event.stopPropagation();openL(${i})">▶️ Tonton Animasi</button></div></div></div>`}
+document.getElementById('artGrid').innerHTML=M.slice(0,8).map((m,i)=>card(i,i)).join('');
+document.getElementById('kreGrid').innerHTML=M.slice(8).map((m,i)=>card(i+8,i)).join('');
+document.getElementById('vidGrid').innerHTML=M.map((m,i)=>`<button class="tile" style="background:${cols[i%8]}" onclick="openL(${i})"><span>${m[1]}</span>${m[0]}<br><small>${m[2]} · ±20 saat</small></button>`).join('');
+document.getElementById('friends').innerHTML=M.slice(0,8).map(m=>`<div class="fr"><span>${m[1]}</span>${m[2]}</div>`).join('');
+document.getElementById('artChain').innerHTML=M.slice(0,8).map(m=>`<i>${m[1]} ${m[0]}</i>`).join('➡️');
+document.getElementById('istilah').insertAdjacentHTML('beforeend',M.slice(0,8).map(m=>`<tr><td>${m[0]}</td><td>${m[4]}</td></tr>`).join(''));
+
+// Kad ruang
+const R=[['Ruang Diri','🫧','pulse','Ruang di sekeliling badan kita. Depakan tangan tanpa mengenai kawan.'],
+['Ruang Am','🧒','edar','Ruang besar tempat ramai murid bergerak, seperti dewan. Bergerak dengan selamat.'],
+['Arah','➡️','edar','Depan, belakang, kiri dan kanan. Kita boleh bergerak ke pelbagai arah.'],
+['Aras','🐒','','Tinggi, sederhana dan rendah. Cuba bergerak di setiap aras.'],
+['Laluan','🐾','kupu','Laluan boleh lurus, zig-zag atau melengkung.']];
+document.getElementById('ruangGrid').innerHTML=R.map((r,i)=>`<div class="card" style="height:220px" tabindex="0" onclick="this.classList.toggle('flip')"><div class="in"><div class="f" style="background:${cols[i+3]}"><span style="font-size:3.4rem;display:inline-block;animation:${r[2]||'bob'} 2.4s ease-in-out infinite ${r[2]==='edar'?'alternate':''}">${r[1]}</span><h3>${r[0]}</h3></div><div class="b"><b>${r[0]}</b><p>${r[3]}</p></div></div></div>`).join('');
+
+// Pelajaran animasi
+
+// ===== Enjin haiwan 3D (CSS 3D, tanpa pustaka luar) =====
+const pr=(w,h,d,c,x,y,z,o={})=>{const n=o.n||5;let q='';for(let k=0;k<n;k++){const t=n>1?k/(n-1)*2-1:0;q+=`<i style="transform:translateZ(${(t*d/2).toFixed(1)}px) scale(${Math.sqrt(1-.85*t*t).toFixed(2)})"></i>`}
+ return `<div class="pt" style="--c:${c};width:${w}px;height:${h}px;left:${x-w/2}px;top:${y-h/2}px;transform:translateZ(${z}px)${o.r?' rotateZ('+o.r+'deg)':''}">${q}</div>`};
+const at=(x,y,z,cl,inner,st='')=>`<div class="at" style="left:${x}px;top:${y}px;transform:translateZ(${z}px)"><div class="j ${cl}" style="${st}">${inner}</div></div>`;
+const ft=(x,y,z,cl)=>at(x,y,z,'',`<div class="${cl}"></div>`);
+const RG=[
+{c:'#ff9a3d',b:'#fff1d0',f:'#ff6f1a',fish:1,arm:'fin',leg:0,tail:'fin',bw:130,bh:108,bd:96,lift:60},
+{c:'#d9a066',b:'#f7e0bd',ear:'long',tail:'long',arm:'arm',bw:104,bh:124,hw:96,hh:86,nose:'#5a3a2a',fw:50,fd:70,eb:12},
+{c:'#ff8fb8',b:'#ffc6dc',beak:1,k:'#2d2d2d',neck:50,th:1,ls:1.1,lc:'#ff7aa8',arm:'wing',wt:'#ff6a9e',bw:96,bh:110,bd:84,hw:70,hh:66,hd:66,tail:'ball'},
+{c:'#34476b',b:'#ffffff',beak:1,k:'#ffb02e',arm:'wing',bw:112,bh:128,bd:100,hw:98,hh:88,ls:.32,lc:'#ff9f1c',fw:48,fd:56,tail:'ball'},
+{c:'#a9815f',b:'#f6e2c4',ear:'round',spk:1,arm:'arm',nose:'#2e2220',muz:1,bw:110,bh:112,bd:104,tail:'ball',ls:.9},
+{c:'#9c6b45',b:'#f3d3a8',ear:'round',tail:'long',arm:'arm',muz:1,nose:'#3a2a20',hand:'#f3d3a8',bw:100,bh:120,bd:90},
+{c:'#ffc78a',b:'#fff4e6',ear:'cat',tail:'long',arm:'arm',nose:'#ff8fa6',bw:102,bh:116,bd:92,hw:106},
+{c:'#f6f3ff',b:'#ffffff',ear:'long',ie:1,tail:'ball',arm:'arm',nose:'#ff9db5',bw:100,bh:116,bd:90,eb:8},
+{c:'#7b5cf0',b:'#d9ccff',arm:'bw',w1:'#ffa8d5',w2:'#8fd8ff',ant:1,bw:52,bh:118,bd:50,hw:70,hh:66,hd:60,th:1,ls:.5,lc:'#5a3fc0',lift:40},
+{c:'#46b6ea',b:'#e3f6ff',beak:1,k:'#ffb02e',crest:1,arm:'wing',flap:1,wt:'#2f95cc',th:1,ls:.9,lc:'#ffb02e',tail:'ball',bw:98,bh:108,bd:90,hw:92,hh:84},
+{c:'#ffffff',b:'#f2f6fa',beak:1,k:'#ff9a3d',neck:60,th:1,ls:.5,lc:'#ff9a3d',arm:'wing',wt:'#e8eef5',bw:104,bh:104,bd:96,hw:70,hh:66,hd:66,tail:'ball'}];
+function build(a){
+ const bw=a.bw||110,bh=a.bh||120,bd=a.bd||100,s=a.c,b=a.b,k=a.k||'#333';
+ let hw=a.hw||100,hh=a.hh||90,hd=a.hd||90;
+ if(a.fish){hw=bw*.9;hh=bh*.9;hd=bd}
+ const hy=a.fish?-6:-(bh/2+hh/2-18)-(a.neck||0);
+ const fz=(x,y)=>{const u=x/(hw/2),v=y/(hh/2);return hd/2*Math.sqrt(Math.max(.04,1-u*u-v*v))*.93};
+ let H='',B='';
+ if(!a.fish)H+=pr(hw,hh,hd,s,0,0,0,{n:7});
+ if(a.ear==='cat')[1,-1].forEach(g=>H+=at(g*30,-hh/2+8,0,'ea',pr(30,42,14,s,0,-14,0,{n:3})+pr(14,26,6,'#ffb3c6',0,-12,8,{n:1}),`--sg:${g};--ba:22deg`));
+ if(a.ear==='long')[1,-1].forEach(g=>H+=at(g*22,-hh/2+4,0,'ea',pr(24,76,14,s,0,-34,0,{n:3})+(a.ie?pr(11,50,5,'#ffb3c6',0,-34,6,{n:1}):''),`--sg:${g};--ba:${a.eb||10}deg`));
+ if(a.ear==='round')[1,-1].forEach(g=>H+=pr(36,36,18,s,g*(hw/2+2),-6,-4,{n:3})+pr(20,20,6,b,g*(hw/2+4),-6,6,{n:1}));
+ if(a.ant)[1,-1].forEach(g=>H+=at(g*14,-hh/2+4,0,'ea',pr(5,46,5,'#333',0,-23,0,{n:2}),`--sg:${g};--ba:18deg`));
+ if(a.crest)H+=pr(16,34,16,k,0,-hh/2-6,0,{n:3,r:14});
+ if(a.muz)H+=pr(62,46,16,b,0,14,fz(0,14)-2,{n:3});
+ const ex=a.fish?34:21,ey=a.fish?-8:-4;
+ [1,-1].forEach(g=>{H+=ft(g*ex,ey,fz(g*ex,ey)+1,'ey')+ft(g*(ex+11),ey+17,fz(g*(ex+11),ey+17),'ck')});
+ if(a.beak)H+=pr(34,18,34,k,0,12,fz(0,12)+8,{n:3});else{H+=ft(0,19,fz(0,19)+1,'mo');if(a.nose)H+=pr(18,12,12,a.nose,0,8,fz(0,8)+3,{n:2})}
+ if(a.neck){const t=-bh/2+10,u=hy+15;B+=pr(24,t-u,24,s,0,(t+u)/2,0,{n:3})}
+ B+=pr(bw,bh,bd,s,0,0,0,{n:7})+pr(bw*.62,bh*.68,6,b,0,10,bd*.4,{n:1});
+ if(a.spk)for(let i=0;i<9;i++)B+=pr(26,40,12,'#6e4e38',(i%3-1)*30,-34+Math.floor(i/3)*34,-bd/2+6,{n:2,r:(i%3-1)*25});
+ if(a.fish)B+=pr(10,44,44,a.f,0,-bh/2,-6,{n:3});
+ if(a.tail==='long')B+=at(0,bh*.28,-bd*.38,'tail',pr(20,76,20,s,0,38,0,{n:4}));
+ if(a.tail==='ball')B+=at(0,bh*.25,-bd/2+2,'tail',pr(34,34,34,b,0,0,-8,{n:4}));
+ if(a.tail==='fin')B+=at(0,0,-bd/2,'tf',pr(8,78,70,a.f,0,0,-34,{n:3}));
+ [1,-1].forEach(g=>{
+  const x=g*(bw/2-2),y=-bh*.28,sg=`--sg:${-g};--dl:${g>0?0:-.5}s`;let ar;
+  if(a.arm==='bw')ar=pr(112,140,5,a.w1,g*60,-20,-10,{n:1})+pr(70,80,5,a.w2,g*38,52,-12,{n:1});
+  else if(a.arm==='fin')ar=pr(16,50,34,a.f,0,25,0,{n:3});
+  else if(a.arm==='wing')ar=pr(22,60,40,s,0,30,0,{n:4})+at(0,56,0,'el',pr(18,52,30,a.wt||s,0,26,0,{n:4}));
+  else ar=pr(27,54,27,s,0,26,0,{n:4})+at(0,48,0,'el',pr(23,48,23,s,0,24,0,{n:4})+pr(26,26,26,a.hand||b,0,52,0,{n:3}));
+  B+=at(x,y,0,'a '+(a.arm==='bw'?'wy ':'')+(a.flap?'fl':''),ar,sg);
+ });
+ let gb=bh/2,Lg="",Lh=0;
+ if(a.leg!==0){
+  const lc=a.lc||s,fc=a.fc||lc,t=a.th,K=a.ls||1,tw=t?10:34,sw=t?9:30,tl=(t?64:56)*K,sl=(t?64:50)*K,fw=a.fw||(t?34:42),fh=t?8:20;
+  gb=bh/2+tl+sl+fh-24;Lh=tl+sl-4;
+  [1,-1].forEach(g=>{Lg+=at(g*bw*.22,bh/2-14,0,'lg',pr(tw,tl,tw,lc,0,tl/2,0,{n:3})+at(0,tl-4,0,'kn',pr(sw,sl,sw,lc,0,sl/2,0,{n:3})+pr(fw,fh,a.fd||50,fc,0,sl+fh/2-6,12,{n:3})),`--sg:${g};--dl:${g>0?-.5:0}s`)});
+ }
+ B+=at(0,hy,0,'hd',H);
+ const lf=a.lift||0,pvY=-bh*.28-126;
+ return `<div class="ob"><div class="pl" style="top:${-(gb+lf)}px"><div class="at" style="top:${gb+lf}px"><div class="sh"></div></div><div class="at" style="top:${pvY}px;--ph:${gb+lf-pvY}px"><div class="bar"></div></div><div class="pv" style="top:${pvY}px"><div class="rt" style="top:${-pvY}px;--L:${Lh}px">${Lg}<div class="at" style="top:${bh/2-14}px"><div class="j tr"><div class="at" style="top:${-(bh/2-14)}px">${B}</div></div></div></div></div></div></div>`;
+}
+function buildRig(i){const c=document.getElementById('cam');c.innerHTML=build(RG[i]);c.style.animation='';c.style.transform=''}
+function setMv(c){document.getElementById('st').className='stage'+(c?' mv-'+c+(c==='cheer'?' yay':''):'')}
+(function(){const st=document.getElementById('st');let x0=null,ry=0;
+ st.addEventListener('pointerdown',e=>{if(e.target.closest('.x'))return;x0=e.clientX;ry=0;st.style.cursor='grabbing'});
+ addEventListener('pointermove',e=>{if(x0===null)return;ry=Math.max(-160,Math.min(160,(e.clientX-x0)*.8));const c=document.getElementById('cam');c.style.animation='none';c.style.transform=`scale(.7) rotateX(-10deg) rotateY(${ry}deg)`});
+ addEventListener('pointerup',()=>{x0=null;st.style.cursor=''});
+})();
+let cur=0,tm=[],Q=null;
+const clr=()=>{tm.forEach(clearTimeout);tm=[]};
+function openL(i,q){cur=i;Q=q||null;document.getElementById('lesson').classList.add('on');document.body.style.overflow='hidden';playL()}
+function closeL(){clr();Q=null;document.getElementById('lesson').classList.remove('on');document.body.style.overflow=''}
+function playAll(a,b){const q=[];for(let i=a+1;i<b;i++)q.push(i);openL(a,q)}
+function tab(k){[0,1].forEach(i=>{document.getElementById('t'+i).hidden=i!==k;document.querySelectorAll('.tab')[i].classList.toggle('on',i===k)})}
+function playL(){
+  clr();const m=M[cur],B=document.getElementById('bub'),N=document.getElementById('notes');
+  buildRig(cur);setMv('');N.className='notes';
+  N.innerHTML=`<h3>📝 Nota: ${m[0]}</h3><div class="tabs"><button class="tab on" onclick="tab(0)">🧒 Mod Murid</button><button class="tab" onclick="tab(1)">🎓 Ilmu Guru</button></div>
+  <div id="t0"><p>${m[4]}</p><b>Langkah:</b><ol>${m[5].map(s=>`<li>${s}</li>`).join('')}</ol><div class="note in2">💡 Tahukah kamu? ${m[6]}</div></div>
+  <div id="t1" hidden><ul><li><b>Otot dan bahagian badan:</b> ${m[8][0]}</li><li><b>Kesilapan lazim:</b> ${m[8][1]}</li><li><b>Penekanan keselamatan:</b> ${m[8][2]}</li></ul></div>
+  <div class="note safe">⚠️ Utamakan keselamatan: lakukan pemanasan badan, gunakan tilam dan minta guru memerhati.</div><small class="src">Sumber: ${m[7]}</small>`;
+  const L=[`Hai kawan! Hari ini ${m[2]} akan menunjukkan cara melakukan ${m[0]}!`,...m[5].map((s,k)=>`Langkah ${k+1}: ${s}`),'Hebat! Baca nota di bawah. 👇'];
+  L.forEach((t,k)=>tm.push(setTimeout(()=>{
+    B.textContent=m[2]+': '+t;
+    if(k===1)setMv(m[3]);
+    if(k===L.length-1){setMv('cheer');N.className='notes show';
+      if(Q&&Q.length)tm.push(setTimeout(()=>{cur=Q.shift();playL()},4500));}
+  },k*4000)));
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeL()});
+
+// Kuiz 3 tahap: [soalan,[pilihan],indeks betul,penjelasan]
+const LV=[
+{n:'Tahap 1',t:'Jom Ingati Saya',d:'Soalan tentang pengenalan',c:'#c9efd9',q:[
+['Apakah Gimnastik Artistik?',['Pergerakan badan yang terkawal dan berurutan dengan teknik yang betul','Permainan menggunakan bola','Berjalan tanpa arah'],0,'Gimnastik artistik menekankan kawalan badan, urutan gerakan dan teknik yang selamat.'],
+['Pergerakan Kreatif ialah pergerakan yang…',['Ditetapkan sepenuhnya oleh guru','Dicipta secara alami oleh murid atau individu','Hanya dilakukan dengan peralatan'],1,'Pergerakan kreatif memberi ruang kepada individu untuk mencipta gerakan berdasarkan idea atau tema.'],
+['Yang manakah contoh Gimnastik Artistik?',['Gulingan','Bergerak seperti kupu-kupu mengikut idea sendiri','Menyanyi'],0,'Gulingan ialah gerakan asas gimnastik artistik.'],
+['Bergerak seperti kupu-kupu mengikut idea sendiri termasuk dalam…',['Gimnastik Artistik','Pergerakan Kreatif','Permainan berpasukan'],1,'Gerakan dicipta secara alami berdasarkan idea, maka ia termasuk dalam pergerakan kreatif.'],
+['Tema yang diterokai dalam website ini ialah…',['Kesedaran Ruang','Kesedaran Masa','Kesedaran Ritma'],0,'Kita meneroka kesedaran ruang: ruang diri, ruang am, arah, aras dan laluan.'],
+['Ruang di sekeliling badan kita dipanggil…',['Ruang diri','Ruang am','Laluan'],0,'Ruang diri ialah ruang di sekeliling badan yang boleh dicapai tanpa berpindah tempat.'],
+['Siapakah rakan Gimi yang menunjukkan gerak edar?',['Nimo','Fifi','Hedi'],0,'Nimo si ikan menunjukkan gerak edar.'],
+['Berapakah gerakan asas gimnastik artistik yang dipelajari di sini?',['Lapan','Tiga','Sebelas'],0,'Lapan gerakan: gerak edar, layangan, imbangan, putaran, gulingan, ayunan, mendarat dan hamburan.']]},
+{n:'Tahap 2',t:'Uji Ingatan',d:'Soalan daripada nota',c:'#fdeaa8',q:[
+['Siapakah yang digelar bapa gimnastik?',['Friedrich Ludwig Jahn','Rudolf Laban','Per Henrik Ling'],0,'Jahn digelar bapa gimnastik dan menggerakkan gerakan Turnverein.'],
+['Jahn membuka Turnplatz pertama di Hasenheide pada tahun…',['1793','1811','1896'],1,'Turnplatz pertama dibuka pada tahun 1811 berhampiran Berlin.'],
+['Gimnastik dipertandingkan dalam Sukan Olimpik moden pertama pada tahun…',['1881','1896','1928'],1,'Sukan Olimpik moden pertama diadakan di Athens pada tahun 1896.'],
+['Siapakah menulis buku teks gimnastik Gymnastik für die Jugend pada 1793?',['GutsMuths','Ling','Laban'],0,'J. C. F. GutsMuths menerbitkan buku teks gimnastik pada tahun 1793.'],
+['Rudolf Laban dikenali sebagai pelopor…',['Pendidikan pergerakan','Sukan renang','Sukan berkuda'],0,'Laban dianggap pelopor pendidikan pergerakan melalui karyanya Modern Educational Dance.'],
+['Empat faktor pergerakan menurut Laban ialah…',['Berat, ruang, masa dan aliran','Warna, bunyi, bentuk dan saiz','Lari, lompat, baling dan tangkap'],0,'Berat (beban), ruang, masa dan aliran menjadi asas pendidikan pergerakan.'],
+['Semasa mendarat, lutut perlu…',['Bengkok','Lurus','Terkunci'],0,'Lutut bengkok membantu menyerap hentakan.'],
+['Kurikulum sekolah rendah yang dilaksanakan bermula 2011 dan disemak semula pada 2017 ialah…',['KSSR','KSSM','KBSM'],0,'KSSR dilaksanakan pada 2011 dan disemak sebagai KSSR (Semakan 2017).']]},
+{n:'Tahap 3',t:'Jom Berfikir',d:'Soalan di luar nota untuk berfikir',c:'#dcd3fa',q:[
+['Mengapakah kita perlu memanaskan badan sebelum bergimnastik?',['Supaya otot dan sendi bersedia dan risiko kecederaan berkurang','Supaya badan cepat letih','Supaya tidak perlu menggunakan tilam'],0,'Pemanasan meningkatkan kesediaan otot dan sendi.'],
+['Dewan sesak dengan ramai murid. Apakah tindakan paling selamat semasa gerak edar?',['Bergerak laju supaya cepat sampai','Perlahankan gerakan dan kekalkan ruang diri','Menutup mata semasa bergerak'],1,'Bergerak perlahan dan memerhati sekeliling mengelakkan perlanggaran.'],
+['Mengapakah lutut dibengkokkan semasa mendarat?',['Untuk menyerap hentakan','Supaya kelihatan lebih tinggi','Supaya lompatan lebih jauh'],0,'Lutut dan pinggul yang bengkok bertindak seperti penyerap hentakan.'],
+['Fifi sukar mengimbang. Cara terbaik untuk membantunya ialah…',['Pandang satu titik tetap dan ketatkan otot perut','Pejam mata dan bergoyang','Angkat kedua-dua kaki'],0,'Titik tumpuan dan otot teras yang kuat membantu kestabilan.'],
+['Mengapakah dagu dirapatkan ke dada semasa menggolek ke hadapan?',['Melindungi leher dan membolehkan badan melengkung','Supaya kelihatan comel','Supaya bergolek lebih laju'],0,'Kedudukan dagu melindungi kepala dan leher.'],
+['Seorang murid mencipta rangkaian gerakan sendiri berdasarkan haiwan kegemaran. Ini ialah…',['Pergerakan kreatif','Gimnastik artistik dengan teknik tetap','Pemanasan badan'],0,'Gerakan dicipta secara alami berdasarkan idea sendiri.'],
+['Mengapakah tilam diperlukan semasa gulingan?',['Mengurangkan tekanan hentakan pada badan','Supaya murid tidak boleh bergerak','Sebagai hiasan'],0,'Tilam mengurangkan tekanan pada badan.'],
+['Yang manakah menunjukkan aras rendah?',['Berlutut atau merangkak','Melompat tinggi','Berjinjit'],0,'Aras rendah ialah kedudukan badan dekat dengan lantai.'],
+['Mengapakah kemahiran baharu perlu dilakukan perlahan dahulu?',['Supaya teknik dan kawalan betul sebelum menambah kesukaran','Supaya cepat selesai','Supaya tidak perlu mendengar guru'],0,'Teknik yang betul mengurangkan risiko kecederaan.'],
+['Rakan berasa pening selepas putaran. Apakah tindakan yang wajar?',['Suruh ulang dengan lebih laju','Berhenti, berehat dan maklumkan guru','Abaikan sahaja'],1,'Keselamatan diutamakan; rakan perlu berehat dan guru dimaklumkan.'],
+['Mengapakah animasi digunakan dalam pembelajaran gimnastik?',['Membantu murid melihat urutan gerakan dengan jelas','Menggantikan semua aktiviti fizikal','Mengurangkan keselamatan'],0,'Animasi menyokong pemahaman, tetapi latihan fizikal yang selamat tetap diperlukan.'],
+['Dalam rangkaian layangan kemudian imbangan, mengapakah pendaratan yang stabil penting?',['Pendaratan stabil memudahkan badan mengimbang','Pendaratan tidak penting','Imbangan dilakukan di udara'],0,'Kedudukan stabil selepas mendarat menjadi asas kepada imbangan.']]}
+];
+const best=[null,null,null];let lv=0,qi=0,sk=0,cq=[];
+function beep(ok){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?660:220;g.gain.value=.05;o.start();o.stop(c.currentTime+.15)}catch(e){}}
+function shuf(a){return a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1])}
+function menu(){
+  document.getElementById('quiz').innerHTML='<p>Pilih tahap. Setiap soalan disertakan penjelasan jawapan.</p>'+LV.map((l,i)=>`<button class="lvl" style="background:${l.c}" onclick="startQ(${i})">${['🌱','🌿','🌳'][i]} ${l.n}: ${l.t}<small>${l.d} · ${l.q.length} soalan${best[i]!==null?' · Terbaik: '+best[i]+'/'+l.q.length:''}</small></button>`).join('');
+}
+function startQ(i){lv=i;qi=0;sk=0;cq=LV[i].q.map(q=>{const o=q[1].map((t,k)=>[t,k===q[2]]);return {q:q[0],o:shuf(o),e:q[3]}});showQ()}
+function showQ(){
+  const Q=document.getElementById('quiz'),L=LV[lv];
+  if(qi>=cq.length){
+    best[lv]=Math.max(best[lv]||0,sk);const p=sk/cq.length;
+    const bd=p>=.9?'🏅 Jaguh Gimnas!':p>=.6?'⭐ Bintang Ruang!':'💪 Cuba Lagi!';
+    Q.innerHTML=`<div class="box" style="text-align:center"><h3>${L.n}: ${L.t}</h3><div style="font-size:2rem">${'⭐'.repeat(Math.round(p*5))||'🌱'}</div><h3>Skor: ${sk}/${cq.length}</h3><h3>${bd}</h3><button class="btn" onclick="startQ(${lv})">Bermain Semula</button>${lv<2?`<button class="btn o" onclick="startQ(${lv+1})">Tahap Seterusnya</button>`:''}<button class="btn p" onclick="menu()">Pilih Tahap</button></div>`;return;
+  }
+  const c=cq[qi];
+  Q.innerHTML=`<div class="box"><p>${L.n} · Soalan ${qi+1}/${cq.length}</p><h3>${c.q}</h3>`+c.o.map((o,i)=>`<button class="opt" onclick="ans(this,${i})">${o[0]}</button>`).join('')+`<p id="fb"></p></div>`;
+}
+function ans(el,i){
+  const c=cq[qi],ok=c.o[i][1];
+  document.querySelectorAll('.opt').forEach((b,k)=>{b.disabled=true;if(c.o[k][1])b.classList.add('ok')});
+  if(!ok)el.classList.add('no');else sk++;
+  beep(ok);
+  document.getElementById('fb').innerHTML=(ok?'🎉 Hebat! ':'😅 Tidak mengapa. ')+c.e+'<br><button class="btn" onclick="qi++;showQ()">Seterusnya</button>';
+}
+menu();renderMap();nextFact();fi=-1;nextFact();
+</script>
+</body>
+</html>
